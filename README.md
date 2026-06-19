@@ -1,4 +1,141 @@
-FdF (Fil de Fer)
+# FdF (Fil de Fer)
+ 
+> A C viewer that renders a height map as a **3D wireframe model** using an
+> **isometric** projection and the **MiniLibX** graphics library.
+ 
+Project completed at the **42** school (42 Málaga campus). Since it is an already
+evaluated and closed submission, the repository contains **a single commit**: the
+project is **finished** and receives no further changes.
+ 
+---
+ 
+## 📖 Description
+ 
+**FdF** ("Fil de Fer", *iron wire* in French) is 42's first graphics project. From a
+`.fdf` file that describes a terrain through a **height matrix**, the program draws
+its relief as a three-dimensional grid.
+ 
+The map file is a grid of numbers, where each value represents the **height (z)** of
+that point:
+ 
+```
+0 0 0 0 0
+0 5 5 5 0
+0 5 9 5 0
+0 5 5 5 0
+0 0 0 0 0
+```
+ 
+The program:
+ 
+1. **Reads and validates** the `.fdf` map with the help of `get_next_line`, building
+   a height matrix.
+2. **Projects** each point `(x, y, z)` from 3D space onto 2D screen coordinates
+   using an **isometric projection** (with sine/cosine and the z elevation).
+3. **Computes the scale and centering** automatically so the model fits in the
+   window, leaving a margin.
+4. **Draws** the lines connecting the points with the **Bresenham algorithm**.
+5. **Opens a window** with MiniLibX and lets you interact with the model using the
+   keyboard.
+---
+ 
+## 🎮 Controls
+ 
+| Key              | Action                                   |
+| ---------------- | ---------------------------------------- |
+| Arrows ↑ ↓ ← →   | Move the model (pan).                    |
+| `+` / `-`        | Zoom in / out.                           |
+| `+` / `-` (alt)  | Increase / decrease the z elevation.     |
+| `R`              | Reset the camera to its initial state.   |
+| `ESC`            | Close the window and quit.               |
+ 
+---
+ 
+## 🧠 Concepts covered
+ 
+- Graphics programming with **MiniLibX** (window, image, `mlx_pixel_put`, hooks).
+- **Isometric** projection from 3D to 2D coordinates.
+- Line drawing with the **Bresenham algorithm**.
+- File reading with `get_next_line`.
+- Memory management and keyboard/window event handling.
+---
+ 
+## 🗂️ Project structure
+ 
+```
+Fdf/
+├── Makefile
+├── include/
+│   └── fdf.h
+├── src/
+│   ├── main.c            # initialization and main loop
+│   ├── parsing_init.c    # input file validation
+│   ├── parsing_map.c     # reading the map into a height matrix
+│   ├── camera.c          # camera setup
+│   ├── projection.c      # isometric projection + scale/centering
+│   ├── algorithm.c       # line drawing (Bresenham)
+│   ├── draw.c            # drawing the mesh in the window
+│   ├── hooks.c           # keyboard and close events
+│   └── utils.c           # memory freeing
+├── libft/                # own library (dependency)
+├── gnl/                  # get_next_line (dependency)
+├── minilibx-linux/       # MiniLibX graphics library (Linux)
+├── test_maps/            # sample .fdf maps
+└── Personal/             # support material (subject, norm, notes)
+```
+ 
+> The project uses **Libft**, **get_next_line**, and **MiniLibX** as dependencies.
+> The Makefile compiles them automatically before linking the executable.
+ 
+---
+ 
+## 🚀 Compilation and usage
+ 
+```bash
+# Build (also builds libft, gnl, and MiniLibX)
+make
+ 
+# Run with a map
+./fdf test_maps/42.fdf
+./fdf test_maps/mars.fdf
+```
+ 
+### System dependencies (MiniLibX on Linux)
+ 
+MiniLibX needs the X11 libraries. On Debian/Ubuntu-based systems:
+ 
+```bash
+sudo apt install xorg libxext-dev
+```
+ 
+Linking uses `-lXext -lX11 -lm`.
+ 
+### Makefile rules
+ 
+| Command        | Description                                                |
+| -------------- | ---------------------------------------------------------- |
+| `make`         | Builds the dependencies and the `fdf` executable.          |
+| `make clean`   | Removes the object files (`.o`).                          |
+| `make fclean`  | Removes the `.o` files, the executable, and the libraries. |
+| `make re`      | Recompiles everything from scratch.                        |
+ 
+---
+ 
+## 👤 Author
+ 
+**jgodoy-m** — Student at [42 Málaga](https://www.42malaga.com/)
+ 
+---
+ 
+## 📝 Note about this repository
+ 
+This project is part of the **42** curriculum. As it is an already finished and
+graded submission, the repository's history consists of **a single commit**. It is
+not under active development: the code is complete and meets the requirements of the
+assignment.
+ 
+
+# FdF (Fil de Fer)
 
 
 Un visualizador en C que representa un mapa de alturas como un modelo 3D en
@@ -12,7 +149,7 @@ entrega ya evaluada y cerrada, el repositorio contiene un único commit: el
 proyecto está terminado y no recibe nuevos cambios.
 
 
-📖 Descripción
+# 📖 Descripción
 
 FdF ("Fil de Fer", hilo de hierro en francés) es el primer proyecto gráfico de
 42. A partir de un archivo .fdf que describe un terreno mediante una matriz de
@@ -42,12 +179,12 @@ teclado.
 
 
 
-🎮 Controles
+# 🎮 Controles
 
 TeclaAcciónFlechas ↑ ↓ ← →Desplazar el modelo (pan).+ / -Acercar / alejar (zoom).+ / - (alt)Aumentar / reducir la elevación de z.RResetear la cámara a su estado inicial.ESCCerrar la ventana y salir.
 
 
-🧠 Conceptos trabajados
+# 🧠 Conceptos trabajados
 
 
 Programación gráfica con MiniLibX (ventana, imagen, mlx_pixel_put, hooks).
@@ -58,7 +195,7 @@ Gestión de memoria y manejo de eventos de teclado/ventana.
 
 
 
-🗂️ Estructura del proyecto
+# 🗂️ Estructura del proyecto
 
 Fdf/
 ├── Makefile
@@ -87,7 +224,7 @@ Makefile las compila automáticamente antes de enlazar el ejecutable.
 
 
 
-🚀 Compilación y uso
+# 🚀 Compilación y uso
 
 bash# Compilar (compila también libft, gnl y MiniLibX)
 make
@@ -109,12 +246,12 @@ Reglas del Makefile
 ComandoDescripciónmakeCompila las dependencias y el ejecutable fdf.make cleanElimina los archivos objeto (.o).make fcleanElimina los .o, el ejecutable y las librerías.make reRecompila todo desde cero.
 
 
-👤 Autor
+# 👤 Autor
 
 jgodoy-m — Estudiante de 42 Málaga
 
 
-📝 Nota sobre el repositorio
+# 📝 Nota sobre el repositorio
 
 Este proyecto forma parte del currículo de 42. Al ser una entrega ya finalizada
 y corregida, el historial del repositorio se compone de un solo commit. No está
