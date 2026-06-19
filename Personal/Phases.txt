@@ -1,0 +1,69 @@
+# Fases detalladas para el proyecto FdF
+
+---
+
+## Fase 1: Preparación
+- Lee el subject completo y subraya los requisitos clave.
+- Crea el repositorio y estructura básica de carpetas: `src/`, `include/`, `libft/`, `Personal/`.
+- Prepara un Makefile mínimo con las reglas obligatorias (`all`, `clean`, `fclean`, `re`, `$(NAME)`).
+- Descarga e instala MiniLibX si no la tienes.
+- Si usas libft, cópiala y asegúrate de que compila desde tu Makefile.
+
+---
+
+## Fase 2: Parsing del mapa
+- Implementa una función para abrir y leer el archivo `.fdf` usando `open` y `get_next_line`.
+- Divide cada línea en tokens usando `ft_split` para obtener los valores de altitud.
+- Convierte los tokens a enteros (`ft_atoi`) y almacénalos en una matriz dinámica (array de arrays).
+- Guarda el ancho (número de columnas) y alto (número de filas) del mapa.
+- Crea una estructura para cada punto: `typedef struct { int x, y, z; } t_point;`
+- Llena una matriz de `t_point` con las coordenadas correctas.
+
+---
+
+## Fase 3: Proyección isométrica
+- Investiga la fórmula de proyección isométrica:  
+  `x_iso = (x - y) * cos(θ)`  
+  `y_iso = (x + y) * sin(θ) - z`
+- Implementa una función que reciba un `t_point` y devuelva sus coordenadas proyectadas en 2D.
+- Ajusta el escalado y el desplazamiento para centrar la figura en la ventana.
+- Haz pruebas con puntos sueltos para comprobar la proyección.
+
+---
+
+## Fase 4: MiniLibX y ventana
+- Inicializa MiniLibX (`mlx_init`), crea una ventana (`mlx_new_window`) y una imagen (`mlx_new_image`).
+- Implementa una función para poner un píxel en la imagen (`mlx_pixel_put` o manipulando el buffer).
+- Dibuja un fondo negro o blanco para limpiar la ventana antes de cada render.
+
+---
+
+## Fase 5: Dibujo de líneas
+- Implementa el algoritmo de Bresenham para dibujar líneas entre dos puntos 2D.
+- Recorre la matriz de puntos y dibuja líneas entre cada punto y sus vecinos (derecha y abajo).
+- Dibuja todo el wireframe del mapa usando las coordenadas proyectadas.
+
+---
+
+## Fase 6: Gestión de eventos
+- Añade hooks de eventos con MiniLibX para:
+  - Cerrar la ventana con la X (`mlx_hook` para el evento destroy).
+  - Salir con la tecla ESC (`mlx_key_hook`).
+- Libera toda la memoria reservada antes de salir (matriz, estructuras, imágenes, etc).
+
+---
+
+## Fase 7: Limpieza y normas
+- Pasa Norminette a todos los archivos.
+- Usa `valgrind` para comprobar que no hay memory leaks.
+- Revisa que el Makefile no haga relink y cumple todas las reglas.
+- Elimina variables globales y revisa el uso correcto de malloc/free.
+
+---
+
+## Fase 8: Bonus (opcional)
+- Implementa zoom (aumentar/disminuir escala con teclas).
+- Permite mover el modelo (traslación con flechas).
+- Añade rotación del modelo (rotar con teclas).
+- Implementa una proyección paralela o cónica.
+- Añade colores según la
